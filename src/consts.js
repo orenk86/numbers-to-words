@@ -22,7 +22,7 @@ export const UP_TO_NINETEEN = [
   'fifteen',
   'sixteen',
   'seventeen',
-  'eightteen',
+  'eighteen',
   'nineteen',
 ];
 
