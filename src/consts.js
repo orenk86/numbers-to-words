@@ -45,3 +45,12 @@ export const FACTORS = {
   100: ' hundred',
   1000: ' thousand',
 };
+
+export const CONJUNCTIONS = {
+  none: '',
+  dash: '-',
+  and: ' and ',
+  comma: ', ',
+};
+
+export const NEGATIVE_NUMBER_PREFIX = 'minus ';
