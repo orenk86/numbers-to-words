@@ -1,6 +1,12 @@
 import { FACTORS, TENS, UP_TO_NINETEEN } from './consts.js';
 
 export function parseNumber(number) {
+  number = Math.floor(number);
+
+  if (number < 0) {
+    return 'minus ' + parseNumber(-number);
+  }
+
   if (number < 20) {
     return UP_TO_NINETEEN[number];
   }

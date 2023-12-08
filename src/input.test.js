@@ -28,4 +28,12 @@ describe('isInputValid', () => {
   it('should return false for more than one input', () => {
     expect(validateInput([1, 2]).isValid).toBe(false);
   });
+
+  it('should return false for a numeric string with a floating point', () => {
+    expect(validateInput(['1.5']).isValid).toBe(false);
+  });
+
+  it('should return false for a number with a floating point', () => {
+    expect(validateInput([1.5]).isValid).toBe(false);
+  });
 });

@@ -44,6 +44,27 @@ describe('parseNumber', () => {
     expect(parseNumber(350402)).toBe('three hundred and fifty thousand, four hundred and two');
     expect(parseNumber(123456)).toBe('one hundred and twenty-three thousand, four hundred and fifty-six');
   });
+
+  it('should return the correct string for a negative number', () => {
+    expect(parseNumber(-1)).toBe('minus one');
+    expect(parseNumber(-10)).toBe('minus ten');
+    expect(parseNumber(-101)).toBe('minus one hundred and one');
+    expect(parseNumber(-1205)).toBe('minus one thousand, two hundred and five');
+    expect(parseNumber(-12345)).toBe('minus twelve thousand, three hundred and forty-five');
+    expect(parseNumber(-100000)).toBe('minus one hundred thousand');
+    expect(parseNumber(-105020)).toBe('minus one hundred and five thousand and twenty');
+  });
+
+  it('should return the correct string for a number with a floating point (redact the value after the floating point)', () => {
+    expect(parseNumber(0.5)).toBe('zero');
+    expect(parseNumber(1.5)).toBe('one');
+    expect(parseNumber(15.5)).toBe('fifteen');
+    expect(parseNumber(52.5)).toBe('fifty-two');
+    expect(parseNumber(100.5)).toBe('one hundred');
+    expect(parseNumber(352.5)).toBe('three hundred and fifty-two');
+    expect(parseNumber(1001.5)).toBe('one thousand and one');
+    expect(parseNumber(9999.5)).toBe('nine thousand, nine hundred and ninety-nine');
+  });
 });
 
 describe('getConjunction', () => {
