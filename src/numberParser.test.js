@@ -1,4 +1,4 @@
-import { getConjunction, parseNumber } from './numberParser';
+import { getConjunction, getFactorValues, parseNumber } from './numberParser';
 
 describe('parseNumber', () => {
   it('should return the correct string for a number less than 20', () => {
@@ -39,6 +39,10 @@ describe('parseNumber', () => {
 
   it('should return the correct string for 100000', () => {
     expect(parseNumber(100000)).toBe('one hundred thousand');
+    expect(parseNumber(200001)).toBe('two hundred thousand and one');
+    expect(parseNumber(330000)).toBe('three hundred and thirty thousand');
+    expect(parseNumber(350402)).toBe('three hundred and fifty thousand, four hundred and two');
+    expect(parseNumber(123456)).toBe('one hundred and twenty-three thousand, four hundred and fifty-six');
   });
 });
 
@@ -55,5 +59,28 @@ describe('getConjunction', () => {
   it('should return ", " for a number less than 1000', () => {
     expect(getConjunction(100)).toBe(', ');
     expect(getConjunction(999)).toBe(', ');
+  });
+});
+
+describe('getFactorValues', () => {
+  it('should return the correct values for a number less than 100', () => {
+    expect(getFactorValues(1)).toEqual({ factor: 1, factorString: '', factoredAmount: 1 });
+    expect(getFactorValues(10)).toEqual({ factor: 10, factorString: '', factoredAmount: 1 });
+    expect(getFactorValues(99)).toEqual({ factor: 10, factorString: '', factoredAmount: 9 });
+  });
+
+  it('should return the correct values for a number less than 1000', () => {
+    expect(getFactorValues(100)).toEqual({ factor: 100, factorString: ' hundred', factoredAmount: 1 });
+    expect(getFactorValues(999)).toEqual({ factor: 100, factorString: ' hundred', factoredAmount: 9 });
+  });
+
+  it('should return the correct values for a number less than 10000', () => {
+    expect(getFactorValues(1000)).toEqual({ factor: 1000, factorString: ' thousand', factoredAmount: 1 });
+    expect(getFactorValues(9999)).toEqual({ factor: 1000, factorString: ' thousand', factoredAmount: 9 });
+  });
+
+  it('should return the correct values for a number less than 100000', () => {
+    expect(getFactorValues(10000)).toEqual({ factor: 1000, factorString: ' thousand', factoredAmount: 10 });
+    expect(getFactorValues(99999)).toEqual({ factor: 1000, factorString: ' thousand', factoredAmount: 99 });
   });
 });

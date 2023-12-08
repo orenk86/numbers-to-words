@@ -37,5 +37,9 @@ export const TENS = [
   'ninety',
 ];
 
-export const HUNDRED = 'hundred';
-export const THOUSAND = 'thousand';
+export const FACTORS = {
+  1: '',
+  10: '',
+  100: ' hundred',
+  1000: ' thousand',
+};

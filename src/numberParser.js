@@ -1,31 +1,19 @@
-import { HUNDRED, TENS, THOUSAND, UP_TO_NINETEEN } from './consts.js';
+import { FACTORS, TENS, UP_TO_NINETEEN } from './consts.js';
 
 export function parseNumber(number) {
   if (number < 20) {
     return UP_TO_NINETEEN[number];
   }
 
-  if (number < 100) {
-    const remainder = number % 10;
-    const conjunction = getConjunction(remainder, number);
-    const suffix = remainder === 0 ? '' : `${conjunction}${parseNumber(remainder)}`;
+  const { factor, factorString, factoredAmount } = getFactorValues(number);
 
-    return `${TENS[Math.floor(number / 10)]}${suffix}`;
-  }
-
-  if (number < 1000) {
-    const hundreds = Math.floor(number / 100);
-    const remainder = number % 100;
-    const conjunction = getConjunction(remainder, number);
-
-    return `${parseNumber(hundreds)} ${HUNDRED}${remainder === 0 ? '' : `${conjunction}${parseNumber(remainder)}`}`;
-  }
-
-  const thousands = Math.floor(number / 1000);
-  const remainder = number % 1000;
+  const remainder = number % factor;
   const conjunction = getConjunction(remainder, number);
 
-  return `${parseNumber(thousands)} ${THOUSAND}${remainder === 0 ? '' : `${conjunction}${parseNumber(remainder)}`}`;
+  const prefix = number < 100 ? TENS[factoredAmount] : parseNumber(factoredAmount);
+  const suffix = remainder === 0 ? '' : `${conjunction}${parseNumber(remainder)}`;
+
+  return `${prefix}${factorString}${suffix}`;
 }
 
 export function getConjunction(remainder, number = 0) {
@@ -44,4 +32,15 @@ export function getConjunction(remainder, number = 0) {
   if (remainder < 1000) {
     return ', ';
   }
+}
+
+export function getFactorValues(number) {
+  const factorLength = Math.floor(Math.log10(number));
+  const factorIndex = Math.min(factorLength, Object.keys(FACTORS).length - 1);
+
+  const factor = Math.pow(10, factorIndex);
+  const factorString = FACTORS[factor];
+  const factoredAmount = Math.floor(number / factor);
+
+  return { factor, factorString, factoredAmount };
 }
