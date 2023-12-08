@@ -1,0 +1,23 @@
+{
+  "name": "numbers-to-words",
+  "version": "1.0.0",
+  "description": "Numbers to words coding challenge",
+  "main": "bin/index.js",
+  "bin": {
+    "numbers-to-words": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "transform": {}
+  },
+  "keywords": [],
+  "author": "Oren Kosto",
+  "license": "N/A",
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
