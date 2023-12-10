@@ -2,6 +2,7 @@ import { getConjunction, getFactorValues, parseNumber } from './numberParser';
 
 describe('parseNumber', () => {
   it('should return the correct string for a number less than 20', () => {
+    expect(parseNumber()).toBe('zero');
     expect(parseNumber(0)).toBe('zero');
     expect(parseNumber(1)).toBe('one');
     expect(parseNumber(10)).toBe('ten');

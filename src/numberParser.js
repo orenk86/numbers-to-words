@@ -1,6 +1,6 @@
 import { FACTORS, TENS, UP_TO_NINETEEN, CONJUNCTIONS, NEGATIVE_NUMBER_PREFIX } from './consts.js';
 
-export function parseNumber(number) {
+export function parseNumber(number = 0) {
   number = Math.floor(number);
 
   if (number < 0) {
